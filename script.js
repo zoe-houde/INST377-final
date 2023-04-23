@@ -41,7 +41,7 @@ function getRandomIntInclusive(min, max) {
       Ask the TAs if you need help with this
     */
   }
-function initMap (carto) {
+function initCarto (carto) {
   const carto = L.map('map').setView([38.98, -76.93], 13);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -49,6 +49,13 @@ function initMap (carto) {
   }).addTo(carto);
   return carto;
 }
+function changeCarto (carto, dataObject) {
+  carto.data.datasets.forEach((set) => {
+    set.data = info;
+
+  })
+}
+
 
 function shapeDataCarto(array) {
   return array.reduce((collection, item) => {
@@ -73,13 +80,13 @@ async function getData(){
 function markerPlace (array, carto) {
   console.log ('array for markers', array);
 
-  map.eachLayer((layer) => {
+  carto.eachLayer((layer) => {
     if (layer instanceof L.Marker) {
       layer.remove();
     }
   });
 
-  array .forEach((resto) => {
+  array.forEach((resto) => {
     console.log('markerPlace', item);
     const {coordinates} = item.geocoded_column_1;
 
@@ -187,6 +194,7 @@ function markerPlace (array, carto) {
         const newList = filterList(currentList, event.target.value);
         console.log(newList);
         injectHTML(newList);
+        changeCarto(myCarto);
         markerPlace(newList, carto);
 
     })
