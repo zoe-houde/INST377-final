@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoe Houde's INST377 Labs</title>
+    <title>Zoe Houde's Final Project</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
@@ -18,7 +18,7 @@ crossorigin=""></script>
 <body>
     <div class="wrapper">
         <header class="header">
-            <h1>Zoe Houde's INST377 Labs</h1>
+            <h1>Zoe Houde's INST377 Final</h1>
         </header>
     <div class="container">
         <div class="left_section box">
@@ -26,14 +26,14 @@ crossorigin=""></script>
             <form  
                 action="https://data.princegeorgescountymd.gov/Environment/LitterTRAK/9tsa-iner"
                 class= "box main_form">
-                <button type="button" id="data_load">Load County Data</button>
-                <button type="button" id="data_clear">ClearCounty Data</button>
+                <button type="button" id="data_load">Load Data</button>
+                <button type="button" id="data_clear">Clear Data</button>
             <div>
-                <label for= "resto" > Filter byRestaurant Name</label>
+                <label for= "resto" > Filter by zip code</label>
                 <input type="text" name="resto" id="resto"/>
                 </div>
                 <div class = "buttons">
-                <button type="button" id="generate">Generate List</button>
+                <button type="button" id="generate">Generate Map</button>
                 </div>
             </form>
         </div>
@@ -41,17 +41,14 @@ crossorigin=""></script>
             <canvas id="myMap"></canvas>
         </div>
         <div class="right_section box">
-            <h3>Local Restaurant List</h3>
+            <h3>Local Litter</h3>
             <div id="map" class="box"></div>
             <ol class="box" id="restaurant_list">
-                A list of local restaurants
+               Litter in your area 
             </ol>
             <div class="lds-ellipsis" id="data-load_animation"><div></div><div></div><div></div>
         </div>
     </div>
-    <footer a class="footer sticky">
-        Zoehoude <a href='https://github.com/zoe-houde/INST377-Lab-Work.git'> link
-    </footer>
 </div>
 <script src="./script.js"></script>
 </body>
