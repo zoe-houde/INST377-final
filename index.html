@@ -11,9 +11,6 @@
 
     <link rel="stylesheet" href="style.css">
     <!-- Make sure you put this AFTER Leaflet's CSS -->
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-crossorigin=""></script>
 </head>
 <body>
     <div class="wrapper">
@@ -27,22 +24,31 @@ crossorigin=""></script>
                 action="https://data.princegeorgescountymd.gov/Environment/LitterTRAK/9tsa-iner"
                 class= "box main_form">
                 <button type="button" id="data_load">Load Data</button>
-                <button type="button" id="data_clear">Clear Data</button>
+                <button id="clearDataButton" id="data_clear">Clear Data</button>
             <div>
-                <label for= "resto" > Filter by zip code</label>
-                <input type="text" name="resto" id="resto"/>
+                
                 </div>
                 <div class = "buttons">
-                <button type="button" id="generate">Generate Map</button>
+                <button type="button" id="generateDropDown">Generate Map</button>
+                <div class="generateDropDown">
+                    <button class="dropdrop">Dropdown by zipcode</button>
+                    <div class="dropdown-content">
+                      <a href="#dropdown-content a">
+                        <a href ="#"> 20470</a>
+                      <a href="#">
+                      </a>
+                      <a href="#">Link 3</a>
+                    </div>
+                  </div>
                 </div>
             </form>
         </div>
-        <div class ="map_containter">
+        <div class="right_section box">
+            <div class="right_section box">
             <canvas id="myMap"></canvas>
         </div>
-        <div class="right_section box">
-            <h3>Local Litter</h3>
-            <div id="map" class="box"></div>
+            <div class="dropdown">
+</div>
             <ol class="box" id="restaurant_list">
                Litter in your area 
             </ol>
@@ -51,5 +57,8 @@ crossorigin=""></script>
     </div>
 </div>
 <script src="./script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+crossorigin=""></script>
 </body>
     </html>

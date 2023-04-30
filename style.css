@@ -58,6 +58,36 @@
       transform: translate(24px, 0);
     }
   }
+  /* Dropdown Button */
+.dropdrop {
+  background-color: #70817b;
+  color: white;
+  padding: 10px;
+  font-size: 10px;
+  border: grid;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
   /* CSS instructions for Lab 5 */
 /* Bring in your successful CSS from week 4 */
 /*
@@ -119,12 +149,6 @@ form {
   accent-color: hsla(120, 100%, 50%, 0.482);
 }
 
-/*
-  - These styles use 'class names'
-  - You can apply them by using the 'class' attribute on your HTML
-  - like this: <div class="wrapper">
-  - note that the period vanishes there!
-*/
 div {
   border: 2px dashed rgba(0, 0, 0, 0.8);
 }
