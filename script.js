@@ -1,7 +1,3 @@
-/*
-  Hook this script to index.html
-  by adding `<script src="script.js">` just before your closing `</body>` tag
-*/
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -28,6 +24,7 @@ function cutAreaList(list) {
   }
 
 function initCarto() {
+  console.log("initCarto");
   const newMap = L.map("map").setView([38.98, -76.93], 13); //define 
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19, 
@@ -53,8 +50,7 @@ function shapeDataCarto(array) {
 }
 
 async function getData() {
-  const url =
-    "https://data.princegeorgescountymd.gov/Environment/LitterTRAK/9tsa-iner";
+  const url ="https://data.princegeorgescountymd.gov/resource/9tsa-iner.json";
   const data = await fetch(url);
   const json = await data.json();
 
@@ -82,19 +78,38 @@ function markerPlace(array, carto) {
 }
 
 async function mainEvent() {
-const mapNewish = initCarto();
+  const mapNewish = initCarto();
   
-const form = document.querySelector(".main_form"); // This class name needs to be set on your form before you can listen for an event on it
-const submit = document.querySelector("#form_button");
-const loadAnimation = document.querySelector(".lds-ellipsis");
-const restoName = document.querySelector("#resto");
-const cartoTarget = document.querySelector("#map");
-submit.style.display = "none";
+  const form = document.querySelector(".main_form"); // This class name needs to be set on your form before you can listen for an event on it
+  const submit = document.querySelector("#form_button");
+  const loadAnimation = document.querySelector(".lds-ellipsis");
+  const restoName = document.querySelector("#resto");
+  const cartoTarget = document.querySelector("#map");
+  submit.style.display = "block";
 
-const myCarto = initCarto(cartoTarget);
+  const myCarto = initCarto(cartoTarget);
 
 //   // /* APit data request */
-const cartoData = await getData();
+  const cartoData = await getData();
+
+
+function generateDropDown() {
+  document.getElementById("myDropDown").classList.toggle("show");
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches(".droptn")) {
+    var dropdowns = 
+  document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropDown = dropdowns [i];
+      if (openDropDown.classList.contains('show')){
+        openDropDown.classList.remove('show');
+      }
+    }
+  }
+}
 
 if (cartoData.length > 0) {
 submit.style.display = "block";
@@ -105,6 +120,7 @@ generateMapButton.classList.add("hidden");
 
 mapNewish();
 
+
 let currentArray;
 form.addEventListener("submit", async (submitEvent) => {  
   submitEvent.preventDefault();
@@ -114,7 +130,7 @@ form.addEventListener("submit", async (submitEvent) => {
 
 mainForm.addEventListener("click", async (submitEvent) => {
 
-loadMapButton.addEventListener("click", async (submitEvent) => {
+loadMap.addEventListener("click", async (submitEvent) => {
 submitEvent.preventDefault();
 console.log("loading data");
 loadAnimation.style.display = "inline-block";
@@ -149,25 +165,21 @@ generateMapButton.addEventListener("click", (event) => {
 console.log("generate new list");
 console.log("what is the type of recallList:", typeof recallList);
 
-generateDropDown.addEventListener("click", (event) => {
-  console.log("dropdown menu")
-  console.log("getting zipcode",typeof zip)
-})
 
-currentList = cutRestaurantList(storedList);
+currentList = currentList(storedList);
 console.log(currentList);
 injectHTML(currentList);
 markerPlace(currentList, newMap);
 });
 
-textField.addEventListener("input", (event) => {
-console.log("input", event.target.value);
-const newList = filterList(currentList, event.target.value);
-console.log(newList);
-injectHTML(newList);
-changeCarto(myCarto);
-markerPlace(newList, carto);
-});
+// textField.addEventListener("input", (event) => {
+// console.log("input", event.target.value);
+// const newList = filterList(currentList, event.target.value);
+// console.log(newList);
+// injectHTML(newList);
+// changeCarto(myCarto);
+// markerPlace(newList, carto);
+// });
 
 clearDataButton.addEventListener("click", (event) => {
 console.log("clear browser data");

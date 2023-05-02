@@ -21,41 +21,39 @@
         <div class="left_section box">
             <h2>Form Inputs</h2>
             <form  
-                action="https://data.princegeorgescountymd.gov/Environment/LitterTRAK/9tsa-iner"
+                action="https://data.princegeorgescountymd.gov/resource/9tsa-iner.json"
                 class= "box main_form">
                 <button type="button" id="data_load">Load Data</button>
                 <button id="clearDataButton" id="data_clear">Clear Data</button>
             <div>
-                
                 </div>
                 <div class = "buttons">
-                <button type="button" id="generateDropDown">Generate Map</button>
-                <div class="generateDropDown">
-                    <button class="dropdrop">Dropdown by zipcode</button>
-                    <div class="dropdown-content">
-                      <a href="#dropdown-content a">
-                        <a href ="#"> 20470</a>
-                      <a href="#">
-                      </a>
-                      <a href="#">Link 3</a>
-                    </div>
+                <button type="button" id="generateMapButton">Generate Map</button>
+                <div class = "dropdown">
+                    <button onhover= generateDropDown()
+                    class="droptn">Dropdown by zipcode</button>
+                    <div id= "myDropDown" class="dropdown-content">
+                        <a href ="#">20470</a>
+                        <a href="#">20741</a>
+                        <a href="#">20742</a>
                   </div>
                 </div>
             </form>
         </div>
         <div class="right_section box">
-            <div class="right_section box">
-            <canvas id="myMap"></canvas>
+            <div class="map_container">
+            <canvas id="map"></canvas>
         </div>
             <div class="dropdown">
 </div>
-            <ol class="box" id="restaurant_list">
+<div class="map_container">
+            <ol class="box">
                Litter in your area 
             </ol>
+        </div>
             <div class="lds-ellipsis" id="data-load_animation"><div></div><div></div><div></div>
         </div>
     </div>
-</div>
 <script src="./script.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
 integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
