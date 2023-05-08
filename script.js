@@ -85,7 +85,7 @@ async function mainEvent() {
   const loadAnimation = document.querySelector(".lds-ellipsis");
   const restoName = document.querySelector("#resto");
   const cartoTarget = document.querySelector("#map");
-  submit.style.display = "block";
+  loadAnimation.style.display = "block";
 
   const myCarto = initCarto(cartoTarget);
 
@@ -144,6 +144,7 @@ parsedData = storedList;
 
 
 
+
 loadAnimation.style.display = "none";
 console.table(storedList);
 });
@@ -166,10 +167,10 @@ console.log("generate new list");
 console.log("what is the type of recallList:", typeof recallList);
 
 
-currentList = currentList(storedList);
+currentList = myCarto(storedList);
 console.log(currentList);
 injectHTML(currentList);
-markerPlace(currentList, newMap);
+markerPlace(currentList, initCarto);
 });
 
 // textField.addEventListener("input", (event) => {
@@ -181,10 +182,18 @@ markerPlace(currentList, newMap);
 // markerPlace(newList, carto);
 // });
 
+formDataButton.addEventListener("click", (event) => {
+  console.log("clear all data");
+  const formControl = localStorage.clear();
+  formControl.addEventListener("click", (event) => {
+  console.group("local Storage Check", localStorage.getItem("storedData"));
+   } )});
+
+
 clearDataButton.addEventListener("click", (event) => {
 console.log("clear browser data");
 localStorage.clear();
-console.group("localStorage Check", localStorage.getItem("storedData"));
+console.group("local Storage Check", localStorage.getItem("storedData"));
 });
 
 document.addEventListener("DOMContentLoaded", async () => mainEvent()); // the async keyword means we can make API requests */
