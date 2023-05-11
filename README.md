@@ -18,7 +18,7 @@ What visualisation or other JS libraries does your project use?
 - API, leaflet map.
 
 What CSS frameworks did you use? What version of them?
-- 
+- Attempted a dropdown, but turns out it was already built into the system. 
 
 What is your actual project trying to display and solve?
 - My target system is essentially a ‘call out’, drawing people's attention to the way of life that is so prevalent in our American lifestyle. We produce so much trash and some people do not know how to recycle properly, or they litter when it’s more convenient than finding a trash can. It attempts to display the trashcans in the area as well as where the most litter is collected. 

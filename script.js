@@ -127,7 +127,7 @@ async function mainEvent() {
     let currentArray;
     form.addEventListener("submit", async (submitEvent) => {
       submitEvent.preventDefault();
-      currentArray = processResturants(cartoData);
+      currentArray = processMarkers(cartoData);
     });
   }
   const mainForm = newMap;
@@ -152,10 +152,12 @@ async function mainEvent() {
     injectHTML(currentList);
   });
 
-  const formProps = Object.fromEntries(formData);
+
+  const formProps = Object.fromEntries.formData;
 
   console.log(formProps);
-  const newList = filterList(currentList, formProps.resto);
+
+  newList = storedList(currentList, formProps.resto);
   console.log(newList);
   injectHTML(newList);
 }
@@ -165,7 +167,7 @@ generateMapButton.addEventListener("click", (event) => {
   console.log("what is the type of recallList:", typeof recallList);
 
 
-  currentList = myCarto(storedList);
+  currentList = myCarto(recallList);
   console.log(currentList);
   injectHTML(currentList);
   markerPlace(currentList, initCarto);
