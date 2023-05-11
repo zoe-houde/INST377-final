@@ -1,7 +1,63 @@
-<!DOCTYPE html> 
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoe Houde's Final Project</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+
+    <link rel="stylesheet" href="style.css">
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+</head>
 <body>
-<h1> hello world</h1>
-<p> im hosted with github pages.</p>
+    <div class="wrapper">
+        <header class="header">
+            <h1>Zoe Houde's INST377 Final</h1>
+        </header>
+    <div class="container">
+        <div class="left_section box">
+            <h2>Form Inputs</h2>
+            <form  class= "box main_form">
+                <button type="button" id="data_load">Load Data</button>
+                <button id="clearDataButton" id="data_clear">Clear Data</button>
+            <div>
+                </div>
+                <div class = "buttons">
+                    <button type ="button" id = "formDataButton"> Form control</button>
+                <button type="button" id="generateMapButton">Generate Map</button>
+                <h3> Select a Zipcode</h3>
+                <form action="/action_page.php">
+                    <select name="zipcodes" id="zipcodes">
+                        <option
+                        value="20740">20740</option>
+                    </select>
+                    <br><br>
+                    <input type ="submit"
+                    value="Submit">
+                </form>
+            </form>
+        </div>
+        <div class="right_section box">
+            <div class="map_container">
+            <div id="map"></div>
+
+            <div class="dropdown">
+</div>
+        </div>
+    <div class="map_container">
+            <ol class="#map">
+            Litter in your area
+            </ol>
+        </div>
+            <div class="lds-ellipsis" id="data-load_animation"><div></div><div></div><div></div>
+        </div>
+    </div>
+<script src="./script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+crossorigin=""></script>
 </body>
-</html>
+    </html>
