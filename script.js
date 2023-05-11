@@ -15,19 +15,19 @@ function injectHTML(list) {
 }
 
 function cutAreaList(list) {
-    console.log("fired cut list");
-    const range = [...Array(15).keys()]; //new arrary
-    return (newArray = range.map((item) => {
-      const index = getRandomIntInclusive(0, list.length - 1);
-      return list[index];
-    })); //map is like 'for each' returns new array
-  }
+  console.log("fired cut list");
+  const range = [...Array(15).keys()]; //new arrary
+  return (newArray = range.map((item) => {
+    const index = getRandomIntInclusive(0, list.length - 1);
+    return list[index];
+  })); //map is like 'for each' returns new array
+}
 
 function initCarto() {
   console.log("initCarto");
   const newMap = L.map("map").setView([38.98, -76.93], 13); //define 
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19, 
+    maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(newMap);
   return newMap;
@@ -50,7 +50,7 @@ function shapeDataCarto(array) {
 }
 
 async function getData() {
-  const url ="https://data.princegeorgescountymd.gov/resource/9tsa-iner.json";
+  const url = "https://data.princegeorgescountymd.gov/resource/9tsa-iner.json";
   const data = await fetch(url);
   const json = await data.json();
 
@@ -78,8 +78,13 @@ function markerPlace(array, carto) {
 }
 
 async function mainEvent() {
-  const mapNewish = initCarto();
-  
+  //const mapNewish = initCarto();
+  const newMap = L.map("map").setView([38.98, -76.93], 13); //define 
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(newMap);
+
   const form = document.querySelector(".main_form"); // This class name needs to be set on your form before you can listen for an event on it
   const submit = document.querySelector("#form_button");
   const loadAnimation = document.querySelector(".lds-ellipsis");
@@ -87,113 +92,100 @@ async function mainEvent() {
   const cartoTarget = document.querySelector("#map");
   loadAnimation.style.display = "block";
 
-  const myCarto = initCarto(cartoTarget);
-
-//   // /* APit data request */
+  //   //   // /* APit data request */
   const cartoData = await getData();
 
 
-function generateDropDown() {
-  document.getElementById("myDropDown").classList.toggle("show");
-}
+  function generateDropDown() {
+    document.getElementById("myDropDown").classList.toggle("show");
+  }
 
-window.onclick = function(event) {
-  if (!event.target.matches(".droptn")) {
-    var dropdowns = 
-  document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropDown = dropdowns [i];
-      if (openDropDown.classList.contains('show')){
-        openDropDown.classList.remove('show');
+  window.onclick = function (event) {
+    if (!event.target.matches(".droptn")) {
+      var dropdowns =
+        document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropDown = dropdowns[i];
+        if (openDropDown.classList.contains('show')) {
+          openDropDown.classList.remove('show');
+        }
       }
     }
   }
-}
 
-if (cartoData.length > 0) {
-submit.style.display = "block";
-loadAnimation.classList.remove("lds-ellipsis");
-loadAnimation.classList.add("lds-ellipsis_hidden");
-loadAnimation.style.display = "none";
-generateMapButton.classList.add("hidden");
+  if (cartoData.length > 0) {
+    submit.style.display = "block";
+    loadAnimation.classList.remove("lds-ellipsis");
+    loadAnimation.classList.add("lds-ellipsis_hidden");
+    loadAnimation.style.display = "none";
+    generateMapButton.classList.add("hidden");
 
-mapNewish();
-
-
-let currentArray;
-form.addEventListener("submit", async (submitEvent) => {  
-  submitEvent.preventDefault();
-  currentArray = processResturants(cartoData);
-});
-}
-
-mainForm.addEventListener("click", async (submitEvent) => {
-
-loadMap.addEventListener("click", async (submitEvent) => {
-submitEvent.preventDefault();
-console.log("loading data");
-loadAnimation.style.display = "inline-block";
+    //mapNewish();
 
 
-const results = await fetch("https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json");
+    let currentArray;
+    form.addEventListener("submit", async (submitEvent) => {
+      submitEvent.preventDefault();
+      currentArray = processResturants(cartoData);
+    });
+  }
+  const mainForm = newMap;
+   mainForm.addEventListener("click", async (submitEvent) => {
 
-const storedList = await results.json();
-localStorage.setItem("storedData", JSON.stringify(storedList));
-parsedData = storedList;
+    loadMap.addEventListener("click", async (submitEvent) => {
+      submitEvent.preventDefault();
+      console.log("loading data");
+      loadAnimation.style.display = "inline-block";
 
+      const results = await fetch("https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json");
 
+      const storedList = await results.json();
+      localStorage.setItem("storedData", JSON.stringify(storedList));
+      parsedData = storedList;
 
+      loadAnimation.style.display = "none";
+      console.table(storedList);
+    });
 
-loadAnimation.style.display = "none";
-console.table(storedList);
-});
+    console.table(currentList);
+    injectHTML(currentList);
+  });
 
-console.table(currentList);
-injectHTML(currentList);
-});
+  const formProps = Object.fromEntries(formData);
 
-const formData = new FormData(mainForm);
-const formProps = Object.fromEntries(formData);
-
-console.log(formProps);
-const newList = filterList(currentList, formProps.resto);
-console.log(newList);
-injectHTML(newList);
+  console.log(formProps);
+  const newList = filterList(currentList, formProps.resto);
+  console.log(newList);
+  injectHTML(newList);
 }
 
 generateMapButton.addEventListener("click", (event) => {
-console.log("generate new list");
-console.log("what is the type of recallList:", typeof recallList);
+  console.log("generate new list");
+  console.log("what is the type of recallList:", typeof recallList);
 
 
-currentList = myCarto(storedList);
-console.log(currentList);
-injectHTML(currentList);
-markerPlace(currentList, initCarto);
+  currentList = myCarto(storedList);
+  console.log(currentList);
+  injectHTML(currentList);
+  markerPlace(currentList, initCarto);
 });
 
-// textField.addEventListener("input", (event) => {
-// console.log("input", event.target.value);
-// const newList = filterList(currentList, event.target.value);
-// console.log(newList);
-// injectHTML(newList);
-// changeCarto(myCarto);
-// markerPlace(newList, carto);
-// });
+
 
 formDataButton.addEventListener("click", (event) => {
   console.log("clear all data");
   const formControl = localStorage.clear();
   formControl.addEventListener("click", (event) => {
-  console.group("local Storage Check", localStorage.getItem("storedData"));
-   } )});
+    console.group("local Storage Check", localStorage.getItem("storedData"));
+  })
+});
 
 
 clearDataButton.addEventListener("click", (event) => {
-console.log("clear browser data");
-localStorage.clear();
-console.group("local Storage Check", localStorage.getItem("storedData"));
+  console.log("clear browser data");
+  localStorage.clear();
+  console.group("local Storage Check", localStorage.getItem("storedData"));
 });
 
 document.addEventListener("DOMContentLoaded", async () => mainEvent()); // the async keyword means we can make API requests */
